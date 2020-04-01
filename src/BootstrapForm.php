@@ -5,9 +5,10 @@ namespace RealRipley\BootstrapForm;
 use Collective\Html\FormBuilder;
 use Collective\Html\HtmlBuilder;
 use Illuminate\Contracts\Config\Repository as Config;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Traits\Macroable;
 
 class BootstrapForm
@@ -122,7 +123,7 @@ class BootstrapForm
             $this->setRightColumnClass($options['right_column_class']);
         }
 
-        array_forget($options, [
+        Arr::forget($options, [
             'left_column_class',
             'left_column_offset_class',
             'right_column_class'
@@ -640,7 +641,7 @@ class BootstrapForm
     {
         $label = $this->getLabelTitle($label, $name);
 
-        $optionsField = $this->getFieldOptions(array_except($options, ['suffix', 'prefix']), $name);
+        $optionsField = $this->getFieldOptions(Arr::except($options, ['suffix', 'prefix']), $name);
 
         $inputElement = '';
 
@@ -705,7 +706,7 @@ class BootstrapForm
      */
     public function addonIcon($icon, $options = [])
     {
-        $prefix = array_get($options, 'prefix', $this->getIconPrefix());
+        $prefix = Arr::get($options, 'prefix', $this->getIconPrefix());
 
         return '<div class="input-group-%s"><span class="input-group-text"' . $this->html->attributes($options) . '><i class="' . $prefix . $icon . '"></i></span></div>';
     }
@@ -868,7 +869,7 @@ class BootstrapForm
      */
     protected function getFieldOptionsClass(array $options = [])
     {
-        return array_get($options, 'class');
+        return Arr::get($options, 'class');
     }
 
     /**
